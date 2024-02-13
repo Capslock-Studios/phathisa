@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Navigation with Street View</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        #start-button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&callback=initMap&libraries=geometry" async defer></script>
+    <script>
+        var map, directionsService, directionsRenderer;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: { lat: 37.7749, lng: -122.4194 } // Default center point (San Francisco)
+            });
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+
+            document.getElementById('start-button').addEventListener('click', function() {
+                calculateAndDisplayRoute();
+            });
+        }
+
+        function calculateAndDisplayRoute() {
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+
+            directionsService.route({
+                origin: start,
+                destination: end,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                    map.setZoom(17); // Set street level zoom
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        function showStreetView() {
+            var start = document.getElementById('start').value;
+            var sv = new google.maps.StreetViewService();
+            sv.getPanorama({ location: start, radius: 50 }, function(data, status) {
+                if (status === 'OK') {
+                    var panorama = new google.maps.StreetViewPanorama(
+                        document.getElementById('map'), {
+                            position: data.location.latLng,
+                            pov: { heading: 165, pitch: 0 },
+                            zoom: 1
+                        });
+                    map.setStreetView(panorama);
+                } else {
+                    window.alert('Street view not available for this location.');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" id="start" placeholder="Enter start location">
+        <input type="text" id="end" placeholder="Enter destination">
+        <button id="start-button">Start</button>
+        <button onclick="showStreetView()">Street View</button>
+    </div>
+    <div id="map"></div>
+</body>
+</html>
