@@ -3,7 +3,178 @@
 <head>
     <title>Phathisa Location Tracker test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"---->
+  
+    <style>
+       
+        .circle {
+            top: -55px;
+            right: -140%;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          position: absolute;
+        }
+    
+        .dot {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          cursor: pointer;
+        }
+    
+        .dot.active {
+          background-color: gray; /* Gray color */
+        }
+    
+        .dot.animating {
+          animation: moveDot 1s forwards;
+        }
+    
+        @keyframes moveDot {
+          0% {
+            top: 50%;
+            left: 50%;
+            opacity: 1;
+          }
+          100% {
+            top: 50%;
+            left: 50%;
+            opacity: 0;
+          }
+        }
+    
+        .dot2, .dot3, .dot4, .dot5, .dot6 {
+          width: 0px;
+          height: 0px;
+          border-radius: 50%;
+          border: #2b1446 4px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          background-image: url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/420079347_376771321619653_2978778839404188972_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeGxikrdGbWtmWCXLJuZVeQsVumD0m_sUOFW6YPSb-xQ4Wtp2g2W2XZQPO-t4KFTB7d7Q-OPJOADf4HoZUPyZzci&_nc_ohc=jxNbpdvizUAAX8ir5mJ&_nc_ht=scontent-jnb2-1.xx&oh=00_AfAg3O2uZb9rEO4pCLaea9J5pep2K6IcEl3JlvxEFfvU5Q&oe=65D01D70');
+      background-size: cover;
+        }
+    
+        .dot2.move, .dot3.move, .dot4.move, .dot5.move, .dot6.move {
+      animation: moveDot2 1s forwards;
+    }
 
+    @keyframes moveDot2 {
+          0% {
+         
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            width: 40px;
+            height: 40px;
+          }
+        }
+       
+        .dot2.move {
+          animation: moveDot2 1s forwards;
+        }
+    
+        @keyframes moveDot2 {
+          0% {
+            top: 50%;
+            left: 50%;
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            top: 100%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+          }
+        }
+    
+        .dot3.move {
+          animation: moveDot3 1s forwards;
+        }
+    
+        @keyframes moveDot3 {
+          0% {
+            top: 50%;
+            left: 50%;
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            top: 50%;
+            left: 100%;
+            width: 40px;
+            height: 40px;
+          }
+        }
+    
+        .dot4.move {
+          animation: moveDot4 1s forwards;
+        }
+    
+        @keyframes moveDot4 {
+          0% {
+            top: 50%;
+            left: 50%;
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            top: 50%;
+            left: 0%;
+            width: 40px;
+            height: 40px;
+          }
+        }
+    
+        .dot5.move {
+          animation: moveDot5 1s forwards;
+        }
+    
+        @keyframes moveDot5 {
+          0% {
+            top: 50%;
+            left: 50%;
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            top: 80%;
+            left: 10%;
+            width: 40px;
+            height: 40px;
+          }
+        }
+    
+        .dot6.move {
+          animation: moveDot6 1s forwards;
+        }
+    
+        @keyframes moveDot6 {
+          0% {
+            top: 50%;
+            left: 50%;
+            width: 0%;
+            height: 0%;
+          }
+          100% {
+            top: 80%;
+            left: 90%;
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        .callForm {
+            background-color: #f0f0f0;
+        }
+      </style>
     <style>
         html, body {
             height: 100%;
@@ -248,7 +419,14 @@
     <div id="map-container">
         <div id="header">
             <img id="my-logo" src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/420079347_376771321619653_2978778839404188972_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeGxikrdGbWtmWCXLJuZVeQsVumD0m_sUOFW6YPSb-xQ4Wtp2g2W2XZQPO-t4KFTB7d7Q-OPJOADf4HoZUPyZzci&_nc_ohc=jxNbpdvizUAAX8ir5mJ&_nc_ht=scontent-jnb2-1.xx&oh=00_AfAg3O2uZb9rEO4pCLaea9J5pep2K6IcEl3JlvxEFfvU5Q&oe=65D01D70" alt="My Logo">
-            
+            <div class="circle">
+                <div class="dot" onclick="moveDots()"></div>
+                <a href="#" target="_blank"><div class="dot2"></div></a>
+                <a href="#" target="_blank"><div class="dot3"></div></a>
+                <a href="#" target="_blank"><div class="dot4"></div></a>
+                <a href="#" target="_blank"><div class="dot5"></div></a>
+                <a href="#" target="_blank"><div class="dot6"></div></a>
+              </div>
         </div>
         <div id="map"></div>
         <div id="controls">
@@ -265,5 +443,26 @@
     <script>
         initMap();
     </script>
+
+    
+  <script>
+    function moveDots() {
+      document.querySelector('.dot').classList.add('animating');
+      setTimeout(() => {
+        document.querySelector('.dot2').classList.add('move');
+        document.querySelector('.dot3').classList.add('move');
+        document.querySelector('.dot4').classList.add('move');
+        document.querySelector('.dot5').classList.add('move');
+        document.querySelector('.dot6').classList.add('move');
+      }, 500); // Add a delay to start moving other dots after half a second
+    }
+
+    function callForm() {
+          document.querySelector('.dot2').classList.add('callForm');
+          setTimeout(() => {
+            // Implement your form display logic here
+          }, 500); // Add a delay to allow the animation to finish before displaying the form
+        }
+  </script>
 </body>
 </html>

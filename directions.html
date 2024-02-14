@@ -11,6 +11,19 @@
             margin-bottom: 10px;
         }
     </style>
+      <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&callback=initMap&libraries=geometry" async defer></script>
     <script>
         var map, directionsService, directionsRenderer;
@@ -64,8 +77,63 @@
             });
         }
     </script>
-</head>
+        <script>
+            // Search model
+          $('.search-switch').on('click', function () {
+              $('.search-model').fadeIn(400);
+          });
+      
+          $('.search-close-switch').on('click', function () {
+              $('.search-model').fadeOut(400, function () {
+                  $('#search-input').val('');
+              });
+          });
+      
+            </script>
 <body>
+ <div class="hero_area">
+        <!-- header section strats -->
+     <header class="header_section">
+            <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg custom_nav-container">
+                <a class="navbar-brand" href="index.html">
+                  <span>
+                    HAI<span style="color: rgba(43, 8, 167, 0.932);">BO</span>:
+                  </span>
+                </a>
+                <div class="navbar-collapse" id="">
+                  <div class="user_option">
+                    <a href="">
+                      Login
+                    </a>
+                  </div>
+                  <div class="custom_menu-btn">
+                    <button onclick="openNav()">
+                      <span class="s-1"> </span>
+                      <span class="s-2"> </span>
+                      <span class="s-3"> </span>
+                    </button>
+                  </div>
+                  <div class="nav-search search-switch">
+                    <i class="fa fa-search"></i>
+                </div>
+                  <div id="myNav" class="overlay">
+                    <div class="overlay-content">
+                      <a href="index.html">Home</a>
+                      <a href="about.html">About</a>
+                      <a href="car.html">Cars</a>
+                      <a href="blog.html">Blog</a>
+                      <a href="contact.html">Contact Us</a>
+                      <a href="login.html">Login</a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </header>
+          <!-- end header section -->
+  </head>
+
     <div>
         <input type="text" id="start" placeholder="Enter start location">
         <input type="text" id="end" placeholder="Enter destination">
@@ -73,5 +141,6 @@
         <button onclick="showStreetView()">Street View</button>
     </div>
     <div id="map"></div>
+    
 </body>
 </html>
