@@ -6,7 +6,6 @@
 
     <style>
         html, body {
-            overflow: hidden;
             height: 100%;
             margin: 0;
             padding: 0;
@@ -41,8 +40,8 @@
         #my-logo {
             float: left;
             margin-right: 10px;
-            height: 40px;
-            width: 40px;
+            height: 60px;
+            width: 60px;
             border-radius: 50%;
         }
         #hamburger {
@@ -73,46 +72,16 @@
             cursor: pointer;
         }
         #controls {
-            margin: 50px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1000;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .overlay {
-            position: absolute;
-            z-index: 2; /* Ensure the overlay is above other elements */
-            width: 500px;
-            height: 600px;
-            background-color: white;
-            border: 1px solid rgb(220, 220, 220);
-            border-radius: 22px;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-            transition: top 0.5s; /* Smooth transition */
-            top: calc(100% - 50px); /* Initially partially hidden */
-            left: calc(35% - 30px); /* Center horizontally */
-            overflow: hidden;
-        }
-
-        .overlay button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .overlay button:hover {
-            background-color: #45a049;
-        }
-
         #recenter {
-            top: 50px;
             border-radius: 22px;
             margin-bottom: 10px;
             display: block;
@@ -154,71 +123,10 @@
         }
         @media only screen and (min-width: 768px) {
             #controls {
-                margin: 50px;
+                left: 50%;
                 transform: translateX(-50%);
             }
         }
-
-        @media only screen and (max-width: 600px) {
-        .yellow-box, .brown-box {
-            display: none;
-        }
-        #controls {
-                margin: 50px;
-                transform: translateX(-50%);
-            }
-        .green-box {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 0;
-        }
-
-        .overlay {
-            width: 95%;
-            left: 2.5%;
-        }
-
-        .circle-container {
-            padding: 10px; /* Adjust padding for smaller screens */
-        }
-
-        .circle {
-            width: 40px; /* Reduce circle size for smaller screens */
-            height: 40px;
-        }
-
-        .circle i {
-            font-size: 20px; /* Reduce icon size for smaller screens */
-        }
-
-        /* Colors */
-        .orange {
-            background-color: orange;
-            top: 190px;
-            right: 0px;
-        }
-
-        .blue {
-            background-color: blue;
-            bottom: -190px;
-            left: 170px;
-        }
-
-        .mustard {
-            background-color: #FFDB58; /* Mustard color */
-            top: -250px;
-            right: 180px;
-        }
-
-        .nude {
-            background-color: #FFDDC1; /* Nude color */
-            bottom: 250px;
-            left: -27px;
-        }
-    }
-
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&libraries=places"></script>
     <script>
@@ -226,11 +134,10 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -26.2042, lng: 28.0592},
-                zoom: 13,
-                disableDefaultUI: true // Disable default UI controls
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 12
             });
-            
+
             // Add re-center button functionality
             var recenterButton = document.getElementById('recenter');
             recenterButton.onclick = function() {
@@ -268,14 +175,6 @@
                 event.preventDefault();
                 calculateAndDisplayRoute();
             });
-
-            // Hide overlay when clicking outside of it
-            window.onclick = function(event) {
-                var overlay = document.getElementById('overlay');
-                if (event.target != overlay && event.target.parentNode != overlay && event.target.parentNode.parentNode != overlay) {
-                    overlay.style.top = 'calc(100% - 50px)';
-                }
-            };
         }
 
         function calculateAndDisplayRoute() {
@@ -302,60 +201,48 @@
                     }
                     var hours = Math.floor(travelTime / 3600);
                     var minutes = Math.floor((travelTime % 3600) / 60);
-                    var formattedTime = '';
-                    if (hours > 0) {
-                        formattedTime += hours + ' hours ';
-                    }
-                    formattedTime += minutes + ' minutes';
-                    document.getElementById('travel-time').innerText = 'Estimated travel time: ' + formattedTime;
+                    var totalMinutes = hours * 60 + minutes;
+
+                    // Calculate price based on travel time
+                    var price = calculatePrice(totalMinutes);
+
+                    // Display price
+                    document.getElementById('price').innerText = 'Estimated Price: R' + price.toFixed(2);
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
             });
         }
+
+        // Function to calculate price based on travel time
+        function calculatePrice(totalMinutes) {
+            var basePrice = 20; // Base price for 6 minutes
+            var pricePerMinute = basePrice / 6; // Price per minute
+
+            // Calculate price for the given total minutes
+            var price = basePrice + ((totalMinutes - 6) * pricePerMinute);
+            return price;
+        }
     </script>
 </head>
 <body>
     <div id="map-container">
-        
-        <div id="map"></div>
-        <!-- White div with drop shadow -->
-        <div class="overlay" id="overlay">
-            <button style="width: 100%;" onclick="toggleOverlay()">Toggle</button>
-            <div id="controls">
-                <button id="recenter">Re-center</button>
-                <form id="route-form">
-                    <input type="text" id="start" name="start" placeholder="Start">
-                    <input type="text" id="end" name="end" placeholder="Destination">
-                    <button type="submit">Find Routes</button>
-                </form>
-            </div>
+            <img id="my-logo" src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/420079347_376771321619653_2978778839404188972_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeGxikrdGbWtmWCXLJuZVeQsVumD0m_sUOFW6YPSb-xQ4Wtp2g2W2XZQPO-t4KFTB7d7Q-OPJOADf4HoZUPyZzci&_nc_ohc=jxNbpdvizUAAX8ir5mJ&_nc_ht=scontent-jnb2-1.xx&oh=00_AfAg3O2uZb9rEO4pCLaea9J5pep2K6IcEl3JlvxEFfvU5Q&oe=65D01D70" alt="My Logo">
             
+        <div id="map"></div>
+        <div id="controls">
+            <button id="recenter">Re-center</button>
+            <form id="route-form">
+                <input type="text" id="start" name="start" placeholder="Start">
+                <input type="text" id="end" name="end" placeholder="Destination">
+                <button type="submit">Find Route</button>
+            </form>
         </div>
-        
         <div id="travel-time"></div>
+        <div id="price"></div> <!-- Display price here -->
     </div>
     <script>
         initMap();
     </script>
-
-<script>
-    function toggleOverlay() {
-        var overlay = document.getElementById('overlay');
-        if (overlay.style.top === 'calc(50% - 50px)') {
-            overlay.style.top = 'calc(100% - 50px)';
-        } else {
-            overlay.style.top = 'calc(50% - 50px)';
-        }
-    }
-
-    function showLoading() {
-        var loadingGif = document.getElementById('loadingGif');
-        loadingGif.classList.remove('hidden');
-        setTimeout(function () {
-            window.location.href = 'action.html';
-        }, 2000); // Redirect after 2 seconds
-    }
-</script>
 </body>
 </html>
