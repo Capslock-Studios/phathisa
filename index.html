@@ -4,6 +4,7 @@
     <title>Track My Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         html, body {
             overflow: hidden;
@@ -218,7 +219,356 @@
             left: -27px;
         }
     }
+    
+    
+    .circle-container {
+        position: absolute;
+        z-index: 1; /* Ensure the circles are in the forefront */
+        width: 100%; /* Occupy full width */
+        height: 100%; /* Occupy full height */
+        display: flex; /* Arrange circles in a row */
+        justify-content: space-between; /* Space out circles evenly */
+        align-items: center; /* Center circles vertically */
+        padding: 20px; /* Add padding to avoid edge clipping */
+        pointer-events: none;
+    }
 
+    .circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    /* Colors */
+    .orange {
+        background-color: orange;
+        top: 250px;
+        right: -100px;
+    }
+
+    .blue {
+        background-color: blue;
+        bottom: -240px;
+        left: 760px;
+    }
+
+    .mustard {
+        background-color: #FFDB58; /* Mustard color */
+        top: -300px;
+        right: 780px;
+    }
+
+    .nude {
+        background-color: #FFDDC1; /* Nude color */
+        bottom: 290px;
+        left: -27px;
+    }
+
+    /* Icons */
+    .circle i {
+        color: gray;
+        font-size: 24px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .line {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        border-top: 2px solid black;
+    }
+
+    .vertical-line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        border-left: 2px solid black;
+    }
+
+    .box {
+        position: absolute;
+        border-radius: 20px;
+    }
+
+    .green-box {
+        background-color: green;
+        border: 3px solid red;
+        width: 50%;
+        height: 50%;
+        top: 25%;
+        left: 25%;
+    }
+
+    .yellow-box {
+        background-color: yellow;
+        width: calc(25% - 6px);
+        height: 50%;
+        top: 25%;
+        left: 0;
+    }
+
+    .brown-box {
+        background-color: brown;
+        width: calc(25% - 6px);
+        height: 50%;
+        top: 25%;
+        right: 0;
+    }
+
+    /* White div with drop shadow */
+    .overlay {
+        position: absolute;
+        z-index: 2; /* Ensure the overlay is above other elements */
+        width: 500px;
+        height: 600px;
+        background-color: white;
+        border: px solid rgb(220, 220, 220);
+        border-radius: 22px;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
+        transition: top 0.5s; /* Smooth transition */
+        top: calc(100% - 50px); /* Initially partially hidden */
+        left: calc(35% - 30px); /* Center horizontally */
+        overflow: hidden;
+    }
+
+    .overlay button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .overlay button:hover {
+        background-color: #45a049;
+    }
+
+    .call-for-action {
+        width: 200px;
+        background-color: gray;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+    }
+
+    .call-for-action button {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .loading-gif {
+        background-image: url('loading.gif');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        transition: opacity 2s; /* Fade out animation */
+        opacity: 0; /* Initially hidden */
+    }
+
+    /* Ensure map fills remaining space */
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .yellow-box, .brown-box {
+            display: none;
+        }
+
+        .green-box {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 0;
+        }
+
+        .overlay {
+            width: 95%;
+            left: 2.5%;
+        }
+
+        .circle-container {
+            padding: 10px; /* Adjust padding for smaller screens */
+        }
+
+        .circle {
+            width: 40px; /* Reduce circle size for smaller screens */
+            height: 40px;
+        }
+
+        .circle i {
+            font-size: 20px; /* Reduce icon size for smaller screens */
+        }
+
+        /* Colors */
+        .orange {
+            background-color: orange;
+            top: 190px;
+            right: 0px;
+        }
+
+        .blue {
+            background-color: blue;
+            bottom: -190px;
+            left: 170px;
+        }
+
+        .mustard {
+            background-color: #FFDB58; /* Mustard color */
+            top: -250px;
+            right: 180px;
+        }
+
+        .nude {
+            background-color: #FFDDC1; /* Nude color */
+            bottom: 250px;
+            left: -27px;
+        }
+    }
+
+    .hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+    .overlay {
+        position: absolute;
+        z-index: 2; /* Ensure the overlay is above other elements */
+        width: 500px;
+        height: 600px;
+        background-color: white;
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 22px;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
+        transition: top 0.5s; /* Smooth transition */
+        top: calc(100% - 50px); /* Initially partially hidden */
+        left: calc(35% - 30px); /* Center horizontally */
+        overflow: hidden;
+    }
+
+    .overlay button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .overlay button:hover {
+        background-color: #45a049;
+    }
+
+    .call-for-action {
+        width: 200px;
+        background-color: gray;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+    }
+
+    .call-for-action button {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .loading-gif {
+        background-image: url('loading.gif');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        transition: opacity 2s; /* Fade out animation */
+        opacity: 0; /* Initially hidden */
+    }
+
+    #controls {
+        top: 3px;
+        padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    #recenter {
+            border-radius: 22px;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            top:30px;
+        }
+        #route-form {
+            margin-top: 10px;
+        }
+        #route-form input[type="text"] {
+            width: calc(100% - 20px);
+            margin-bottom: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #route-form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            top:50px;
+        }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&libraries=places"></script>
     <script>
@@ -317,7 +667,23 @@
 </head>
 <body>
     <div id="map-container">
-        
+        <div class="circle-container">
+            <div class="circle orange">
+                <i class="fas fa-dog"></i>
+            </div>
+            
+            <div class="circle blue">
+                <i class="fas fa-futbol"></i>
+            </div>
+            
+            <div class="circle mustard">
+                <i class="fas fa-sun"></i>
+            </div>
+            
+            <div class="circle nude">
+                <i class="fas fa-hand-paper"></i>
+            </div>
+        </div>
         <div id="map"></div>
         <!-- White div with drop shadow -->
         <div class="overlay" id="overlay">
