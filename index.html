@@ -112,6 +112,52 @@
             background-color: #45a049;
         }
 
+        .signin-form {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .signin-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .submit-btn {
+            margin-top:250px ;
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
         #recenter {
             top: 50px;
             border-radius: 22px;
@@ -145,7 +191,7 @@
         }
         #travel-time {
             position: absolute;
-            top: 10px;
+            top: 100px;
             right: 10px;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 10px;
@@ -188,15 +234,20 @@
         .circle {
             width: 40px; /* Reduce circle size for smaller screens */
             height: 40px;
+            
+            background-color: white;
+            border: 1px solid rgb(220, 220, 220);
+            border-radius: 22px;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
         }
 
         .circle i {
             font-size: 20px; /* Reduce icon size for smaller screens */
         }
 
-        /* Colors */
+        /* Colors Orange */
         .orange {
-            background-color: orange;
+            background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
             top: 190px;
             right: 0px;
         }
@@ -238,42 +289,59 @@
         height: 60px;
         border-radius: 50%;
         position: relative;
+            border: 2px solid rgb(255, 255, 255);
+        background: #e9e9e9d7;
+        
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
+    
     }
 
     /* Colors */
     .orange {
-        background-color: orange;
+       /* background-color: orange;*/
+       background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
         top: 250px;
         right: -100px;
     }
 
     .blue {
-        background-color: blue;
+        /*background-color: blue;*/
         bottom: -240px;
         left: 760px;
     }
 
     .mustard {
-        background-color: #FFDB58; /* Mustard color */
+        /*background-color: #FFDB58;*/ /* Mustard color */
         top: -300px;
         right: 780px;
     }
 
     .nude {
-        background-color: #FFDDC1; /* Nude color */
+        /*background-color: #FFDDC1;*/ /* Nude color */
         bottom: 290px;
         left: -27px;
     }
 
     /* Icons */
     .circle i {
-        color: gray;
-        font-size: 24px;
+        color: rgb(154, 154, 154);
+        font-size: 30px;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
+      /* Icon gif */
+      .circle img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+    }
+
 
     .line {
         position: absolute;
@@ -321,37 +389,6 @@
         right: 0;
     }
 
-    /* White div with drop shadow */
-    .overlay {
-        position: absolute;
-        z-index: 2; /* Ensure the overlay is above other elements */
-        width: 500px;
-        height: 600px;
-        background-color: white;
-        border: px solid rgb(220, 220, 220);
-        border-radius: 22px;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-        transition: top 0.5s; /* Smooth transition */
-        top: calc(100% - 50px); /* Initially partially hidden */
-        left: calc(35% - 30px); /* Center horizontally */
-        overflow: hidden;
-    }
-
-    .overlay button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        cursor: pointer;
-    }
-
-    .overlay button:hover {
-        background-color: #45a049;
-    }
 
     .call-for-action {
         width: 200px;
@@ -411,11 +448,7 @@
             border-radius: 0;
         }
 
-        .overlay {
-            width: 95%;
-            left: 2.5%;
-        }
-
+  
         .circle-container {
             padding: 10px; /* Adjust padding for smaller screens */
         }
@@ -431,25 +464,26 @@
 
         /* Colors */
         .orange {
-            background-color: orange;
+           /* background-color: orange;*/
+           background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
             top: 190px;
             right: 0px;
         }
 
         .blue {
-            background-color: blue;
+            /*background-color: blue;*/
             bottom: -190px;
             left: 170px;
         }
 
         .mustard {
-            background-color: #FFDB58; /* Mustard color */
+           /* background-color: #FFDB58; /* Mustard color */
             top: -250px;
             right: 180px;
         }
 
         .nude {
-            background-color: #FFDDC1; /* Nude color */
+            /*background-color: #FFDDC1; /* Nude color */
             bottom: 250px;
             left: -27px;
         }
@@ -461,36 +495,6 @@
     }
 
 
-    .overlay {
-        position: absolute;
-        z-index: 2; /* Ensure the overlay is above other elements */
-        width: 500px;
-        height: 600px;
-        background-color: white;
-        border: 1px solid rgb(220, 220, 220);
-        border-radius: 22px;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-        transition: top 0.5s; /* Smooth transition */
-        top: calc(100% - 50px); /* Initially partially hidden */
-        left: calc(35% - 30px); /* Center horizontally */
-        overflow: hidden;
-    }
-
-    .overlay button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        cursor: pointer;
-    }
-
-    .overlay button:hover {
-        background-color: #45a049;
-    }
 
     .call-for-action {
         width: 200px;
@@ -667,17 +671,19 @@
 </head>
 <body>
     <div id="map-container">
+        
         <div class="circle-container">
-            <div class="circle orange">
-                <i class="fas fa-dog"></i>
-            </div>
+            <a href="blank.html" class="circle orange">
+                <img src="https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" alt="Dog Icon">
+            </a>
             
             <div class="circle blue">
                 <i class="fas fa-futbol"></i>
             </div>
             
             <div class="circle mustard">
-                <i class="fas fa-sun"></i>
+                <i class="fas fa-bars"></i>
+
             </div>
             
             <div class="circle nude">
@@ -686,16 +692,19 @@
         </div>
         <div id="map"></div>
         <!-- White div with drop shadow -->
+                   
         <div class="overlay" id="overlay">
             <button style="width: 100%;" onclick="toggleOverlay()">Toggle</button>
-            <div id="controls">
-                <button id="recenter">Re-center</button>
-                <form id="route-form">
-                    <input type="text" id="start" name="start" placeholder="Start">
-                    <input type="text" id="end" name="end" placeholder="Destination">
-                    <button type="submit">Find Routes</button>
+            <br>
+            <div class="signin-form">
+                <h2>Create Mission</h2>
+                <form id="route-form" action="#">
+                    <input type="text" id="start" name="start" class="input-field" placeholder="Start" required>
+                    <input type="text" id="end" name="end" placeholder="Destination"  class="input-field" required>
+                    <a type="submit"  style="padding: 10px;" class="submit-btn">Find Routes</a>
                 </form>
             </div>
+        
             
         </div>
         
