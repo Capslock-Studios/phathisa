@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Menu Button</title>
 
   <style>
@@ -39,6 +40,7 @@
         left: 20px;
         width: 60px;
         height: 60px;
+        opacity: 80%;
         border-radius: 50%;
         background-color: #ffffff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
@@ -46,10 +48,12 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        border: 1px solid #1168af;
       }
   
       .menu-btn i {
         font-size: 24px;
+        color: #2980b9;
       }
   
       .menu {
@@ -108,6 +112,7 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
+        opacity: 80%;
         background-color: #ffffff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
         display: flex;
@@ -115,12 +120,16 @@
         align-items: center;
         cursor: pointer;
         z-index: 0;
+        border: 1px solid #1a93f6;
       }
   
       .right-menu-btn i {
+        
         font-size: 24px;
+        color: #2980b9;
       }
-  
+
+   
       .right-menu {
         position: fixed;
         top: 0;
@@ -181,8 +190,8 @@
         position: fixed;
         bottom: 25%;
         right: 20px;
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
         background-color: #ffffff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
@@ -190,6 +199,9 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        border: 2px solid #ffffff ;
+        opacity: 80%;
+        
       }
   
       .bottom-left-menu-btn {
@@ -205,11 +217,30 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        border: 2px solid #ffffff ;
+        opacity: 80%;
       }
   
       .bottom-menu-btn i {
         font-size: 24px;
       }
+
+      .bottom-menu-btn img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+  }
+  
+  .bottom-left-menu-btn img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+  }
+
   
       .bottom-menu {
         position: fixed;
@@ -478,7 +509,7 @@
 <body>
   <!-- Google Map Embed API -->
   <div class="map-container">
-    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.2336946862!2d-74.15618786853057!3d40.71382984000919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1645219054140!5m2!1sen!2s" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.1879007781664!2d28.031928115029536!3d-26.20410298343092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c68c4f8d261%3A0x1eae9e6eddb3c00!2sJohannesburg%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1645225718996!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" gestureHandling="greedy"></iframe>
   </div>
   <!-- My DIv --
   <div id="mydiv">
@@ -506,7 +537,7 @@
                 <!-- Your login form content goes here -->
 
                 <div id="div1" class="req-container">
-                  <div class="sipper-heading">Parking Attendents</div>
+                  <div class="sipper-heading">Parking Services</div>
                   <div class="dropdown" onclick="toggleDropdown(1)">
                     <button class="dropdown-button">Errand Run</button>
                     <div id="dropdown-content-1" class="dropdown-content">
@@ -752,25 +783,26 @@
       <!-- Your menu content goes here -->
       <span class="close-btn" onclick="toggleLeftMenu()">&#10006;</span>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">History</a></li>
+        <li><a href="#">Wallet</a></li>
+        <li><a href="#">Gift Cards</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Help</a></li>
       </ul>
     </div>
   
     <div class="right-menu-btn" onclick="toggleRightMenu()">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-bell" alt="notifications"></i>
+      
     </div>
   
     <div class="right-menu" id="right-menu">
       <!-- Your menu content goes here -->
       <span class="close-btn" onclick="toggleRightMenu()">&#10006;</span>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#">Notifications</a></li>
+        <li><a>you are not logged in</a></li>
       </ul>
     </div>
   
@@ -788,21 +820,21 @@
     </script>
   
   <div class="bottom-menu-btn" onclick="toggleMenu()">
-    <i class="fas fa-boot"></i>
+    <img src="../images/counter.gif" alt="counter">
+
   </div>
   
+
   <div class="bottom-left-menu-btn" onclick="recenterMap()">
-    <i class="fas fa-bars"></i>
+    <img src="../images/campass.gif" alt="Compass GIF"> <!-- Compass GIF -->
   </div>
   
   <div class="bottom-menu" id="bottom-menu">
     <!-- Your menu content goes here -->
     <span class="close-btn" onclick="toggleMenu()">&#10006;</span>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#">Current Services</a></li>
+      <li><a href="#">Schedualed services</a></li>
     </ul>
   </div>
   
