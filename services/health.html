@@ -682,13 +682,14 @@
         const scrollableWrapper = document.getElementById('scrollableWrapper');
         if (event.touches[0].clientY < startY) {
           // Swiping up
-          scrollableWrapper.style.height = '96%';
+          scrollableWrapper.style.height = '92%';
         } else if (event.touches[0].clientY > startY) {
           // Swiping down
-          scrollableWrapper.style.height = '60px';
+          scrollableWrapper.style.height = '85px';
         }
       }
     }
+  
   
     function handleTouchEnd() {
       startY = null;

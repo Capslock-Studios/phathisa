@@ -538,6 +538,18 @@
                 <!-- Your login form content goes here -->
 
                 <div id="div1" class="req-container">
+                  <div class="dropdown" onclick="toggleDropdown(3)">
+                    <button class="dropdown-button">Stationary supplies</button>
+                    <div id="dropdown-content-3" class="dropdown-content">
+                      <p class="dropdown-description">create your Stationary list</p>
+                      <form>
+                        <input class="form-input" type="text" placeholder="">
+                        <button class="add-button">More items</button>
+                        <input class="form-input" type="text" placeholder="Deliver Address">
+                        <button class="form-button" type="submit">Submit</button>
+                      </form>
+                    </div>
+                  </div>
                   <div class="dropdown" onclick="toggleDropdown(1)">
                     <button class="dropdown-button">Errand Run</button>
                     <div id="dropdown-content-1" class="dropdown-content">
@@ -551,29 +563,18 @@
                     </div>
                   </div>
                   <div class="dropdown" onclick="toggleDropdown(2)">
-                    <button class="dropdown-button">Home Care</button>
+                    <button class="dropdown-button">Budget Rides</button>
                     <div id="dropdown-content-2" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to help a patient at home</p>
+                      <p class="dropdown-description">Show your student card and payless</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
+                        <input class="form-input" type="text" placeholder="Pick Up">
+                        <input class="form-input" type="text" placeholder="Destination">
                         <button class="add-button">Emergency Contact</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
                     </div>
                   </div>
-                  <div class="dropdown" onclick="toggleDropdown(3)">
-                    <button class="dropdown-button">Delivery</button>
-                    <div id="dropdown-content-3" class="dropdown-content">
-                      <p class="dropdown-description">Request a delivery</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
-                        <button class="add-button">Special Notes</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
+                  
                 </div>
 
          
@@ -682,10 +683,10 @@
         const scrollableWrapper = document.getElementById('scrollableWrapper');
         if (event.touches[0].clientY < startY) {
           // Swiping up
-          scrollableWrapper.style.height = '96%';
+          scrollableWrapper.style.height = '92%';
         } else if (event.touches[0].clientY > startY) {
           // Swiping down
-          scrollableWrapper.style.height = '60px';
+          scrollableWrapper.style.height = '85px';
         }
       }
     }
