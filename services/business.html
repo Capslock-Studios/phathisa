@@ -524,11 +524,11 @@
       <div class="scrollable-div" id="scrollableDiv">
           
           <div class="container">
-            <button class="button" onclick="showDiv(1)">Health</button>
-            <button class="button" onclick="showDiv(2)">Parking</button>
-            <button class="button" onclick="showDiv(3)">Business</button>
-            <button class="button" onclick="showDiv(4)">Delivery</button>
-            <button class="button" onclick="showDiv(5)">Education</button>
+            <button class="button" id="businessButton">Business</button>
+            <button class="button" id="healthButton">Health</button>
+            <button class="button" id="parkingButton">Parking</button>
+            <button class="button" id="deliveryButton">Delivery</button>
+            <button class="button" id="educationButton">Education</button>
           </div>
               <div class="login-form" ontouchstart="stopPropagation(event)">
                 <div class="m-containe">
@@ -576,185 +576,19 @@
                   </div>
                 </div>
 
-                 <!-- Form div2 -->
-                 <div id="div2" class="req-container hidden">
-                  <div class="sipper-heading">Parking</div>
-                  <div class="dropdown" onclick="toggleDropdown(1)">
-                    <button class="dropdown-button">Errand </button>
-                    <div id="dropdown-content-1" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to run your errands</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
-                        <button class="add-button">Add Stops</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(2)">
-                    <button class="dropdown-button">Home Care</button>
-                    <div id="dropdown-content-2" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to help a patient at home</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
-                        <button class="add-button">Emergency Contact</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(3)">
-                    <button class="dropdown-button">Delivery</button>
-                    <div id="dropdown-content-3" class="dropdown-content">
-                      <p class="dropdown-description">Request a delivery</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
-                        <button class="add-button">Special Notes</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                 <!-- Form divs2 -->
-
-                 <!-- Form div3 -->
-                 <div id="div3" class="req-container hidden">
-                  <div class="sipper-heading">Deliveries</div>
-                  <div class="dropdown" onclick="toggleDropdown(1)">
-                    <button class="dropdown-button">Errand </button>
-                    <div id="dropdown-content-1" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to run your errands</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
-                        <button class="add-button">Add Stops</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(2)">
-                    <button class="dropdown-button">Home Care</button>
-                    <div id="dropdown-content-2" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to help a patient at home</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
-                        <button class="add-button">Emergency Contact</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(3)">
-                    <button class="dropdown-button">Delivery</button>
-                    <div id="dropdown-content-3" class="dropdown-content">
-                      <p class="dropdown-description">Request a delivery</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
-                        <button class="add-button">Special Notes</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                 <!-- Form divs3 -->
-                 <!-- Form div4 -->
-                 <div id="div4" class="req-container hidden">
-                  <div class="sipper-heading">Education</div>
-                  <div class="dropdown" onclick="toggleDropdown(1)">
-                    <button class="dropdown-button">Errand </button>
-                    <div id="dropdown-content-1" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to run your errands</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
-                        <button class="add-button">Add Stops</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(2)">
-                    <button class="dropdown-button">Home Care</button>
-                    <div id="dropdown-content-2" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to help a patient at home</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
-                        <button class="add-button">Emergency Contact</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(3)">
-                    <button class="dropdown-button">Delivery</button>
-                    <div id="dropdown-content-3" class="dropdown-content">
-                      <p class="dropdown-description">Request a delivery</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
-                        <button class="add-button">Special Notes</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                 <!-- Form divs4 -->
-                 <!-- Form div5 -->
-                 <div id="div5" class="req-container hidden">
-                  <div class="sipper-heading">Deliveries</div>
-                  <div class="dropdown" onclick="toggleDropdown(1)">
-                    <button class="dropdown-button">Errand </button>
-                    <div id="dropdown-content-1" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to run your errands</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
-                        <button class="add-button">Add Stops</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(2)">
-                    <button class="dropdown-button">Home Care</button>
-                    <div id="dropdown-content-2" class="dropdown-content">
-                      <p class="dropdown-description">Request someone to help a patient at home</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
-                        <button class="add-button">Emergency Contact</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="dropdown" onclick="toggleDropdown(3)">
-                    <button class="dropdown-button">Delivery</button>
-                    <div id="dropdown-content-3" class="dropdown-content">
-                      <p class="dropdown-description">Request a delivery</p>
-                      <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
-                        <button class="add-button">Special Notes</button>
-                        <button class="form-button" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                 <!-- Form divs5 -->
+         
 
                 </div>
               </div>
           <div class="dot-container">
           </div>
         </div>
-        
         <div class="scrollable-div" id="scrollableDiv">
          
              
           <div class="dot-container">
           </div>
         </div>
-
         <div class="scrollable-div" id="scrollableDiv">
          
             <!-- Your login form content goes here -->
@@ -770,15 +604,9 @@
       </div>
     </div>
       </div>
-  
-  
-  
-  
-  
     <div class="menu-btn" onclick="toggleLeftMenu()">
       <i class="fas fa-bars"></i>
     </div>
-  
     <div class="menu" id="menu">
       <!-- Your menu content goes here -->
       <span class="close-btn" onclick="toggleLeftMenu()">&#10006;</span>
@@ -791,13 +619,11 @@
         <li><a href="#">Help</a></li>
       </ul>
     </div>
-  
     <div class="right-menu-btn" onclick="toggleRightMenu()">
       <i class="fas fa-bell" alt="notifications"></i>
       
     </div>
-  
-    <div class="right-menu" id="right-menu">
+     <div class="right-menu" id="right-menu">
       <!-- Your menu content goes here -->
       <span class="close-btn" onclick="toggleRightMenu()">&#10006;</span>
       <ul>
@@ -805,8 +631,7 @@
         <li><a>you are not logged in</a></li>
       </ul>
     </div>
-  
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script>
       function toggleLeftMenu() {
         const menu = document.getElementById("menu");
@@ -818,18 +643,14 @@
         rightMenu.classList.toggle("right-show-menu");
       }
     </script>
-  
   <div class="bottom-menu-btn" onclick="toggleMenu()">
     <img src="../images/counter.gif" alt="counter">
 
   </div>
-  
-
   <div class="bottom-left-menu-btn" onclick="recenterMap()">
     <img src="../images/campass.gif" alt="Compass GIF"> <!-- Compass GIF -->
   </div>
-  
-  <div class="bottom-menu" id="bottom-menu">
+    <div class="bottom-menu" id="bottom-menu">
     <!-- Your menu content goes here -->
     <span class="close-btn" onclick="toggleMenu()">&#10006;</span>
     <ul>
@@ -837,7 +658,6 @@
       <li><a href="#">Schedualed services</a></li>
     </ul>
   </div>
-  
   <script>
     // Your JavaScript code
   </script>
@@ -1101,5 +921,39 @@
         }
       }
     </script>
+
+
+<script>
+  // Get references to all buttons
+  var businessButton = document.getElementById("businessButton");
+  var homeButton = document.getElementById("homeButton");
+  var aboutButton = document.getElementById("aboutButton");
+  var servicesButton = document.getElementById("servicesButton");
+  var contactButton = document.getElementById("contactButton");
+
+  // Add event listeners to each button
+  businessButton.addEventListener("click", function() {
+    window.location.href = "./business.html";
+  });
+
+  healthButton.addEventListener("click", function() {
+    window.location.href = "./health.html";
+  });
+
+  parkingButton.addEventListener("click", function() {
+    window.location.href = "./parking.html";
+  });
+
+  deliveryButton.addEventListener("click", function() {
+    window.location.href = "./delivery.html";
+  });
+
+  educationButton.addEventListener("click", function() {
+    window.location.href = "./education.html";
+  });
+
+</script>
+
+
 </body>
 </html>
