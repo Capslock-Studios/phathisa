@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD App with MongoDB</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">CRUD App with MongoDB</h1>
+
+        <!-- Form for adding new user -->
+        <form id="addUserForm" class="mb-4">
+            <div class="mb-3">
+                <label for="nameInput" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nameInput" required>
+            </div>
+            <div class="mb-3">
+                <label for="surnameInput" class="form-label">Surname</label>
+                <input type="text" class="form-control" id="surnameInput" required>
+            </div>
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailInput" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+
+        <!-- User list -->
+        <ul id="userList" class="list-group">
+            <!-- User items will be dynamically added here -->
+        </ul>
+    </div>
+
+    <!-- MongoDB JavaScript driver -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mongodb/4.3.0/mongodb.min.js"></script>
+
+    <!-- Your custom JavaScript code -->
+    <script>
+        // Connect to MongoDB
+        const MongoClient = mongodb.MongoClient;
+        const uri = "YOUR_MONGODB_URI";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+        // Function to add a new user to MongoDB
+        const addUser = (name, surname, email) => {
+            client.connect((err) => {
+                if (err) throw err;
+                const collection = client.db("test").collection("users");
+                collection.insertOne({ name, surname, email }, (err, result) => {
+                    if (err) throw err;
+                    console.log("User added successfully");
+                    // Refresh user list
+                    fetchUsers();
+                });
+            });
+        };
+
+        // Function to fetch users from MongoDB
+        const fetchUsers = () => {
+            const userList = document.getElementById("userList");
+            userList.innerHTML = ""; // Clear previous list
+
+            client.connect((err) => {
+                if (err) throw err;
+                const collection = client.db("test").collection("users");
+                collection.find({}).toArray((err, docs) => {
+                    if (err) throw err;
+                    docs.forEach((doc) => {
+                        const listItem = document.createElement("li");
+                        listItem.className = "list-group-item";
+                        listItem.textContent = `${doc.name} ${doc.surname} - ${doc.email}`;
+                        
+                        // Add delete button for each user
+                        const deleteButton = document.createElement("button");
+                        deleteButton.className = "btn btn-danger btn-sm float-end";
+                        deleteButton.textContent = "Delete";
+                        deleteButton.onclick = () => deleteUser(doc._id);
+                        listItem.appendChild(deleteButton);
+
+                        userList.appendChild(listItem);
+                    });
+                });
+            });
+        };
+
+        // Function to delete a user from MongoDB
+        const deleteUser = (userId) => {
+            client.connect((err) => {
+                if (err) throw err;
+                const collection = client.db("test").collection("users");
+                collection.deleteOne({ _id: userId }, (err, result) => {
+                    if (err) throw err;
+                    console.log("User deleted successfully");
+                    // Refresh user list
+                    fetchUsers();
+                });
+            });
+        };
+
+        // Event listener for the form submission
+        document.getElementById("addUserForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const name = document.getElementById("nameInput").value.trim();
+            const surname = document.getElementById("surnameInput").value.trim();
+            const email = document.getElementById("emailInput").value.trim();
+            if (name && surname && email) {
+                addUser(name, surname, email);
+                // Clear form fields
+                document.getElementById("nameInput").value = "";
+                document.getElementById("surnameInput").value = "";
+                document.getElementById("emailInput").value = "";
+            } else {
+                alert("Please fill in all fields");
+            }
+        });
+
+        // Fetch users when the page loads
+        fetchUsers();
+
+//YuhxistPUSqaV6ld MongoDB Pass
+//mongodb+srv://siyabot009:<password>@phathisa.eaerecr.mongodb.net/
+
+</script>
+</body>
+</html>

@@ -4,207 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>Menu Button</title>
-
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Business Erranda | Phathisa</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Rest of your CSS styles */
-
-    .map-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
+    /* Add your CSS styles here */
     #map {
-      width: 100%;
-      height: 100%;
+        height: 800px; /* Adjust height as needed */
+        width: 100%; /* Ensure map fills the container */
     }
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-      }
-  
-      .menu-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        width: 60px;
-        height: 60px;
-        opacity: 80%;
-        border-radius: 50%;
-        background-color: #ffffff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border: 1px solid #1168af;
-      }
-  
-      .menu-btn i {
-        font-size: 24px;
-        color: #2980b9;
-      }
-  
-      .menu {
-        position: fixed;
-        top: 0;
-        left: -300px; /* Initially hidden */
-        width: 300px;
-        height: 100%;
-        background-color: #333333;
-        transition: left 0.3s ease;
-        z-index: 5;
-      }
-  
-      .menu.show-menu {
-        left: 0;
-      }
-  
-      .menu ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-  
-      .menu ul li {
-        padding: 15px 20px;
-        border-bottom: 1px solid #555555;
-      }
-  
-      .menu ul li:last-child {
-        border-bottom: none;
-      }
-  
-      .menu ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 18px;
-      }
-  
-      .menu ul li a:hover {
-        color: #ff0000;
-      }
-  
-      .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 24px;
-        color: #ffffff;
-        cursor: pointer;
-      }
-  
-      .right-menu-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        opacity: 80%;
-        background-color: #ffffff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        z-index: 0;
-        border: 1px solid #1a93f6;
-      }
-  
-      .right-menu-btn i {
-        
-        font-size: 24px;
-        color: #2980b9;
-      }
 
-   
-      .right-menu {
-        position: fixed;
-        top: 0;
-        right: -300px; /* Initially hidden */
-        width: 300px;
-        height: 100%;
-        background-color: #333333;
-        transition: right 0.3s ease; /* Transition the right property */
-        color: green;
-        z-index: 6;
-      }
-  
-      .right-menu.right-show-menu {
-        right: 0; /* Slide in from the right */
-      }
-  
-      .right-menu ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-  
-      .right-menu ul li {
-        padding: 15px 20px;
-        border-bottom: 1px solid #555555;
-      }
-  
-      .right-menu ul li:last-child {
-        border-bottom: none;
-      }
-  
-      .right-menu ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 18px;
-      }
-  
-      .right-menu ul li a:hover {
-        color: #ff0000;
-      }
-  
-      .right-menu .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 24px;
-        color: #ffffff;
-        cursor: pointer;
-      }
-  
-      body {
+    body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-      }
-  
-      .bottom-menu-btn {
-        position: fixed;
-        bottom: 25%;
-        right: 20px;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        background-color: #ffffff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border: 2px solid #ffffff ;
-        opacity: 80%;
-        
-      }
-  
-      .bottom-left-menu-btn {
+    }
+
+    .bottom-left-menu-btn {
         position: fixed;
         bottom: 25%;
         left: 20px;
@@ -217,98 +32,25 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        border: 2px solid #ffffff ;
-        opacity: 80%;
-      }
-  
-      .bottom-menu-btn i {
-        font-size: 24px;
-      }
+    }
 
-      .bottom-menu-btn img {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 50%;
-  }
-  
-  .bottom-left-menu-btn img {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 50%;
-  }
-
-  
-      .bottom-menu {
+    #recenter {
         position: fixed;
-        bottom: -100%; /* Initially hidden */
-        left: 0;
-        width: 100%;
-        height: 300px; /* Adjust height as needed */
-        background-color: #333333;
-        transition: bottom 0.3s ease;
-      }
-  
-      .bottom-menu.bottom-show-menu {
-        bottom: 0;
-      }
-  
-      .bottom-menu ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-  
-      .bottom-menu ul li {
-        padding: 15px 20px;
-        border-bottom: 1px solid #555555;
-      }
-  
-      .bottom-menu ul li:last-child {
-        border-bottom: none;
-      }
-  
-      .bottom-menu ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 18px;
-      }
-  
-      .bottom-menu ul li a:hover {
-        color: #ff0000;
-      }
-  
-      .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 24px;
-        color: #ffffff;
+        bottom: 25%;
+        left: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
-      }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-      
-      .scrollable-wrapper {
+    }
+
+    /* Styles for scrollable wrapper */
+    .scrollable-wrapper {
         position: fixed;
         bottom: 0;
         left: 50%;
@@ -322,195 +64,133 @@
         border-radius: 20px 20px 0px 0px;
         background-color: #ffffff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Added drop shadow */
-      }
-  
-      .scrollable-div {
+    }
+
+    .scrollable-div {
         width: 100%;
         height: 100%; /* Total height of the content */
-      }
-  
-      .login-form {
-        width: 300px;
-        margin: auto;
-        padding-top: 1ss50px;
-        background-color: #fff;
-        border-radius: 10px;
-      }
-  
-      /* Media Query for screens smaller than 600px */
-      @media (max-width: 600px) {
-        .scrollable-wrapper {
-          pointer-events: auto; /* Enable pointer events */
-        }
-  
-        .scrollable-wrapper.clicked {
-          pointer-events: none; /* Disable pointer events */
-        }
-      }
-  
-      /* Media Query for screens larger than 600px */
-      @media (min-width: 601px) {
-        .scrollable-wrapper {
-          pointer-events: none; /* Disable pointer events */
-        }
-  
-        .scrollable-wrapper.clicked {
-          pointer-events: auto; /* Enable pointer events */
-        }
-      }
-
-      #mydiv {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  z-index: 9;
-  background-color: #f1f1f1;
-  text-align: center;
-  border: 1px solid #d3d3d3;
-
-
-
-}
-
-#mydivheader {
-  padding: 10px;
-  cursor: move;
-  z-index: 10;
-  color: #fff;
-}
-
-
-.container {
-    width: 100%; /* Set container width to 100% */
-    max-width: 500px; /* Limit maximum width to 500px */
-    height: 50px;
-    overflow-x: auto; /* Enable horizontal scrollbar if content overflows */
-    white-space: nowrap; /* Prevent buttons from wrapping to the next line */
-    border-top: 1px solid #ccc; /* Border for visualization */
-    padding: 5px; /* Add some padding */
-    display: flex; /* Use flexbox for responsive layout */
-    float: right;
-  }
-
-  .button {
-    width: calc(100% / 5 - 10px); /* Calculate button width dynamically */
-    max-width: 70px; /* Set maximum button width */
-    height: 40px;
-    margin-right: 10px; /* Add some space between buttons */
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    font-size: 11px;
-    cursor: pointer;
-  }
-
-  /* Adjust button size for smaller screens */
-  @media screen and (max-width: 500px) {
-    .button {
-      width: calc(70% / 5 - 4px); /* Adjust button width for smaller container */
-      max-width: 80px; /* Remove maximum width constraint */
     }
-  }
 
-  /* Adjust button size for even smaller screens */
-  @media screen and (max-width: 400px) {
-    .button {
-      width: calc(100% / 5 - 10px); /* Adjust button width for even smaller container */
+    /* Media Query for screens smaller than 600px */
+    @media (max-width: 600px) {
+        .scrollable-wrapper {
+            pointer-events: auto; /* Enable pointer events */
+        }
+
+        .scrollable-wrapper.clicked {
+            pointer-events: none; /* Disable pointer events */
+        }
     }
-  }
 
-    </style>
-    <style>
-      .req-container {
-        border-radius: 20px;
-        background-color: #f5f5f5;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      }
-      .dropdown {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-      .dropdown-button {
-        width: 100%;
-        background-color: #3498db;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      .dropdown-button:hover {
-        background-color: #2980b9;
-      }
-      .dropdown-content {
-        display: none;
-        background-color: #ffffff;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .dropdown-content.active {
-        display: block;
-      }
-      .dropdown-description {
-        font-style: italic;
-        margin-bottom: 10px;
-        color: #666666;
-      }
-      .form-input {
-        width: 90%;
-        margin-bottom: 10px;
-        padding: 8px;
-        border: 1px solid #cccccc;
-        border-radius: 5px;
-        font-size: 14px;
-      }
-      .form-button {
-        width: 100%;
-        background-color: #3498db;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      .form-button:hover {
-        background-color: #2980b9;
-      }
-    
-      .add-button {
-        width: 90%;
-        background-color: #db3437;
-        border: none;
-        border-radius: 22px;
-        padding: 10px;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-bottom: 10px;
-      }
-      .add-button:hover {
-        background-color: #b92929;
-      }
-    </style>
+    /* Media Query for screens larger than 600px */
+    @media (min-width: 601px) {
+        .scrollable-wrapper {
+            pointer-events: none; /* Disable pointer events */
+        }
+
+        .scrollable-wrapper.clicked {
+            pointer-events: auto; /* Enable pointer events */
+        }
+    }
+  </style>
 </head>
 <body>
+  <div id="map"></div>
   <!-- Google Map Embed API -->
-  <div class="map-container">
-    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.1879007781664!2d28.031928115029536!3d-26.20410298343092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c68c4f8d261%3A0x1eae9e6eddb3c00!2sJohannesburg%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1645225718996!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" gestureHandling="greedy"></iframe>
-  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&libraries=places&callback=initMap" async defer></script>
+  <script>
+      var map, marker;
+
+      function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: { lat: -26.2042, lng: 28.0592 },
+              zoom: 13,
+              disableDefaultUI: false // Keep default UI controls
+          });
+
+          // Add re-center button functionality
+          var recenterButton = document.getElementById('recenter');
+          recenterButton.onclick = function () {
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function (position) {
+                      var pos = {
+                          lat: position.coords.latitude,
+                          lng: position.coords.longitude
+                      };
+                      map.setCenter(pos);
+                      map.setZoom(17); // Set zoom level to show a 1km radius
+                      if (marker) {
+                          marker.setPosition(pos);
+                      } else {
+                          marker = new google.maps.Marker({
+                              position: pos,
+                              map: map,
+                              title: 'Your Location',
+                              icon: {
+                                  url: 'https://siyapercy.online/Siyabonga%20Ndaba.jpg', // Custom image for marker
+                                  scaledSize: new google.maps.Size(32, 32) // Adjust size as needed
+                              }
+                          });
+                      }
+                  });
+              }
+          };
+
+          // Add autocomplete functionality to start and destination input fields
+          var startAutocomplete = new google.maps.places.Autocomplete(document.getElementById('start'));
+          var endAutocomplete = new google.maps.places.Autocomplete(document.getElementById('end'));
+
+          // Add route tracker
+          document.getElementById('route-form').addEventListener('submit', function (event) {
+              event.preventDefault();
+              calculateAndDisplayRoute();
+          });
+
+          // Hide overlay when clicking outside of it
+          window.onclick = function (event) {
+              var overlay = document.getElementById('overlay');
+              if (event.target != overlay && event.target.parentNode != overlay && event.target.parentNode.parentNode != overlay) {
+                  overlay.style.top = 'calc(100% - 50px)';
+              }
+          };
+      }
+
+      function calculateAndDisplayRoute() {
+          var directionsService = new google.maps.DirectionsService();
+          var directionsRenderer = new google.maps.DirectionsRenderer();
+          directionsRenderer.setMap(map);
+
+          var start = document.getElementById('start').value;
+          var end = document.getElementById('end').value;
+
+          directionsService.route({
+              origin: start,
+              destination: end,
+              travelMode: 'DRIVING'
+          }, function (response, status) {
+              if (status === 'OK') {
+                  directionsRenderer.setDirections(response);
+
+                  // Extract and display travel time
+                  var route = response.routes[0];
+                  var travelTime = 0;
+                  for (var i = 0; i < route.legs.length; i++) {
+                      travelTime += route.legs[i].duration.value;
+                  }
+                  var hours = Math.floor(travelTime / 3600);
+                  var minutes = Math.floor((travelTime % 3600) / 60);
+                  var formattedTime = '';
+                  if (hours > 0) {
+                      formattedTime += hours + ' hours ';
+                  }
+                  formattedTime += minutes + ' minutes';
+                  document.getElementById('travel-time').innerText = 'Estimated travel time: ' + formattedTime;
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+  </script>
   <!-- My DIv --
   <div id="mydiv">
     <div id="mydivheader">Click </div>
@@ -531,7 +211,7 @@
             <button class="button" id="deliveryButton">Delivery</button>
             <button class="button" id="educationButton">Education</button>
           </div>
-              <div class="login-form" ontouchstart="stopPropagation(event)">
+              <div class="login-form" >
                 <div class="m-containe">
                   
                 
@@ -543,8 +223,8 @@
                     <div id="dropdown-content-3" class="dropdown-content">
                       <p class="dropdown-description">Request a delivery</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
+                        <input class="form-input" type="text" placeholder="Pick Up Location" onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="Drop-Off Location" onclick="stopPropagation(event)">
                         <button class="add-button">Special Notes</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
@@ -555,8 +235,8 @@
                     <div id="dropdown-content-1" class="dropdown-content">
                       <p class="dropdown-description">Request someone to run your errands</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
+                        <input class="form-input" type="text" placeholder="Start Location" onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="End Location" onclick="stopPropagation(event)">
                         <button class="add-button">Add Stops</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
@@ -567,8 +247,8 @@
                     <div id="dropdown-content-2" class="dropdown-content">
                       <p class="dropdown-description">Request someone to stock your supplies</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Your Address">
-                        <input class="form-input" type="text" placeholder="Hospital Address">
+                        <input class="form-input" type="text" placeholder="Your Address" onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="Hospital Address" onclick="stopPropagation(event)">
                         <button class="add-button">Emergency Contact</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
@@ -647,15 +327,25 @@
     <img src="../images/counter.gif" alt="counter">
 
   </div>
-  <div class="bottom-left-menu-btn" onclick="recenterMap()">
-    <img src="../images/campass.gif" alt="Compass GIF"> <!-- Compass GIF -->
+  <div class="bottom-left-menu-btn" >
+    <!-- <img src="../images/campass.gif" alt="Compass GIF"> Compass GIF -->
+    <button id="recenter">Recenter</button>
   </div>
+
+  
+  <!-- Recenter button -->
+  <div class="bottom-left-menu-btn">
+    <button id="recenter">Recenter</button>
+  </div>
+
+  
     <div class="bottom-menu" id="bottom-menu">
     <!-- Your menu content goes here -->
     <span class="close-btn" onclick="toggleMenu()">&#10006;</span>
     <ul>
-      <li><a href="#">Current Services</a></li>
-      <li><a href="#">Schedualed services</a></li>
+      <li><a href="#">Current Tasks</a></li>
+      <li><a href="#"> Now Active tasks</a></li>
+      <li><a href="#"> View history tasks</a></li>
     </ul>
   </div>
   <script>
@@ -670,13 +360,13 @@
   
   <script>
     let startY;
-  
+
     function handleTouchStart(event) {
       if (window.innerWidth <= 600) {
         startY = event.touches[0].clientY;
       }
     }
-  
+
     function handleTouchMove(event) {
       if (window.innerWidth <= 600) {
         const scrollableWrapper = document.getElementById('scrollableWrapper');
@@ -689,126 +379,16 @@
         }
       }
     }
-  
-  
+
     function handleTouchEnd() {
       startY = null;
     }
-  
-    function toggleHeight() {
-      if (window.innerWidth > 600) {
-        const scrollableWrapper = document.getElementById('scrollableWrapper');
-        if (scrollableWrapper.classList.contains('clicked')) {
-          scrollableWrapper.classList.remove('clicked');
-        } else {
-          scrollableWrapper.classList.add('clicked');
-        }
-      }
-    }
-  
+
     function stopPropagation(event) {
       event.stopPropagation();
     }
   </script>
-   <style>
   
-    .sipper-container {
-      width: 80%;
-      max-width: 600px;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .sipper-heading {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .box-container {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-    }
-
-    .box {
-      flex: 0 0 auto;
-      width: 300px;
-      height: 250px;
-      margin-right: 10px;
-      background-color: #dddddd;
-      border-radius: 10px;
-      scroll-snap-align: start;
-    }
-
-    .dot-container {
-      position: absolute;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .dot {
-      width: 32px;
-      height: 32px;
-      background-color: #333;
-      border-radius: 50%;
-      display: inline-block;
-      cursor: pointer;
-      margin: 0 5px;
-    }
-
-    .dot.active {
-      background-color: #666;
-    }
-
-
-    
-  .m-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-  }
-  .hidden {
-    display: none;
-  }
-
-  .button-container {
-    width: 100px;
-    position: fixed;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1;
-  }
-  .show-button {
-    background-color: #2ecc71;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  .scroll-arrow {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1;
-  }
-
-  </style>
   <script>
     // Your JavaScript code
 
@@ -891,19 +471,19 @@
         });
       }
     </script>
-    <script>
-      function toggleDropdown(index) {
-        var dropdownContent = document.getElementById('dropdown-content-' + index);
-        dropdownContent.classList.toggle('active');
-        // Close other dropdowns
-        var dropdowns = document.querySelectorAll('.dropdown-content');
-        dropdowns.forEach(function(dropdown) {
-          if (dropdown.id !== 'dropdown-content-' + index) {
-            dropdown.classList.remove('active');
-          }
-        });
-      }
-    </script>
+   <script>
+    function toggleDropdown(index) {
+      var dropdownContent = document.getElementById('dropdown-content-' + index);
+      dropdownContent.classList.toggle('active');
+      // Close other dropdowns
+      var dropdowns = document.querySelectorAll('.dropdown-content');
+      dropdowns.forEach(function(dropdown) {
+        if (dropdown.id !== 'dropdown-content-' + index) {
+          dropdown.classList.remove('active');
+        }
+      });
+    }
+  </script>
     <script>
       function showDiv(divNumber) {
         var allDivs = document.querySelectorAll('.div-content');

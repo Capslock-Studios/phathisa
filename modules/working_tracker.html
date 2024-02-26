@@ -81,6 +81,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        
         #recenter {
             border-radius: 22px;
             margin-bottom: 10px;
@@ -134,10 +135,11 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 12
+                center: {lat: -26.2042, lng: 28.0592},
+                zoom: 13,
+                disableDefaultUI: true // Disable default UI controls
             });
-
+            
             // Add re-center button functionality
             var recenterButton = document.getElementById('recenter');
             recenterButton.onclick = function() {
@@ -175,6 +177,14 @@
                 event.preventDefault();
                 calculateAndDisplayRoute();
             });
+
+            // Hide overlay when clicking outside of it
+            window.onclick = function(event) {
+                var overlay = document.getElementById('overlay');
+                if (event.target != overlay && event.target.parentNode != overlay && event.target.parentNode.parentNode != overlay) {
+                    overlay.style.top = 'calc(100% - 50px)';
+                }
+            };
         }
 
         function calculateAndDisplayRoute() {
@@ -201,27 +211,16 @@
                     }
                     var hours = Math.floor(travelTime / 3600);
                     var minutes = Math.floor((travelTime % 3600) / 60);
-                    var totalMinutes = hours * 60 + minutes;
-
-                    // Calculate price based on travel time
-                    var price = calculatePrice(totalMinutes);
-
-                    // Display price
-                    document.getElementById('price').innerText = 'Estimated Price: R' + price.toFixed(2);
+                    var formattedTime = '';
+                    if (hours > 0) {
+                        formattedTime += hours + ' hours ';
+                    }
+                    formattedTime += minutes + ' minutes';
+                    document.getElementById('travel-time').innerText = 'Estimated travel time: ' + formattedTime;
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
             });
-        }
-
-        // Function to calculate price based on travel time
-        function calculatePrice(totalMinutes) {
-            var basePrice = 20; // Base price for 6 minutes
-            var pricePerMinute = basePrice / 6; // Price per minute
-
-            // Calculate price for the given total minutes
-            var price = basePrice + ((totalMinutes - 6) * pricePerMinute);
-            return price;
         }
     </script>
 </head>

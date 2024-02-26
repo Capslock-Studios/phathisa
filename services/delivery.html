@@ -543,8 +543,8 @@
                     <div id="dropdown-content-1" class="dropdown-content">
                       <p class="dropdown-description">Request someone to run your errands</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Start Location">
-                        <input class="form-input" type="text" placeholder="End Location">
+                        <input class="form-input" type="text" placeholder="Start Location"  onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="End Location"  onclick="stopPropagation(event)">
                         <button class="add-button">Add Stops</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
@@ -555,8 +555,8 @@
                     <div id="dropdown-content-2" class="dropdown-content">
                       <p class="dropdown-description">Request cap to take you to you destination</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Pick Up">
-                        <input class="form-input" type="text" placeholder="Destination">
+                        <input class="form-input" type="text" placeholder="Pick Up" onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="Destination" onclick="stopPropagation(event)">
                         <button class="form-button" type="submit">Submit</button>
                       </form>
                     </div>
@@ -566,8 +566,8 @@
                     <div id="dropdown-content-3" class="dropdown-content">
                       <p class="dropdown-description">Request a delivery</p>
                       <form>
-                        <input class="form-input" type="text" placeholder="Pick Up Location">
-                        <input class="form-input" type="text" placeholder="Drop-Off Location">
+                        <input class="form-input" type="text" placeholder="Pick Up Location" onclick="stopPropagation(event)">
+                        <input class="form-input" type="text" placeholder="Drop-Off Location" onclick="stopPropagation(event)">
                         <button class="add-button">Special Notes</button>
                         <button class="form-button" type="submit">Submit</button>
                       </form>
