@@ -1,738 +1,496 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Phathisa Location Tracker test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="script" href="./script.js">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&display=swap">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        html, body {
-            overflow: hidden;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        #map-container {
-            position: relative;
-            height: 100%;
-            width: 100%;
-        }
-
-        #map-container .gm-style img[src="https://siyapercy.online/Siyabonga%20Ndaba.jpg"] {
-            border-radius: 50%;
-            border: 6px solid #2b1446; /* Adjust border properties as needed */
-        }
-
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-        #header {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            z-index: 1000;
-            
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #my-logo {
-            float: left;
-            margin-right: 10px;
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-        }
-        #hamburger {
-            float: left;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-        #hamburger-menu {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #hamburger-menu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        #hamburger-menu li {
-            padding: 5px 0;
-        }
-        #hamburger-menu li:hover {
-            background-color: #f0f0f0;
-            cursor: pointer;
-        }
-        #controls {
-            margin: 50px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .overlay {
-            position: absolute;
-            z-index: 2; /* Ensure the overlay is above other elements */
-            width: 500px;
-            height: 600px;
-            background-color: white;
-            border: 1px solid rgb(220, 220, 220);
-            border-radius: 22px;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-            transition: top 0.5s; /* Smooth transition */
-            top: calc(100% - 50px); /* Initially partially hidden */
-            left: calc(35% - 30px); /* Center horizontally */
-            overflow: hidden;
-        }
-
-        .overlay button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .overlay button:hover {
-            background-color: #45a049;
-        }
-
-        .signin-form {
-            width: 200px;
-            height: 200px;
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .signin-form h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .input-field {
-            width: 100%;
-            height: 30px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 15px;
-            padding: 5px 10px;
-            box-sizing: border-box;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-
-        .submit-btn {
-            margin-top:250px ;
-            width: 100%;
-            height: 40px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        
-        #recenter {
-            top: 50px;
-            border-radius: 22px;
-            margin-bottom: 10px;
-            display: block;
-            width: 100%;
-            padding: 8px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        #route-form {
-            margin-top: 10px;
-        }
-        #route-form input[type="text"] {
-            width: calc(100% - 20px);
-            margin-bottom: 5px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #route-form button[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #travel-time {
-            position: absolute;
-            top: 100px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        @media only screen and (min-width: 768px) {
-            #controls {
-                margin: 50px;
-                transform: translateX(-50%);
-            }
-        }
-
-        @media only screen and (max-width: 600px) {
-        .yellow-box, .brown-box {
-            display: none;
-        }
-        #controls {
-                margin: 50px;
-                transform: translateX(-50%);
-            }
-        .green-box {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 0;
-        }
-
-        .overlay {
-            width: 95%;
-            left: 2.5%;
-        }
-
-        .circle-container {
-            padding: 10px; /* Adjust padding for smaller screens */
-        }
-
-        .circle {
-            width: 40px; /* Reduce circle size for smaller screens */
-            height: 40px;
-            
-            background-color: white;
-            border: 1px solid rgb(220, 220, 220);
-            border-radius: 22px;
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-        }
-
-        .circle i {
-            font-size: 20px; /* Reduce icon size for smaller screens */
-        }
-
-        /* Colors  Orange */
-        .orange {
-            background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
-            top: 190px;
-            right: 0px;
-        }
-
-        .blue {
-            background-color: blue;
-            bottom: -190px;
-            left: 170px;
-        }
-
-        .mustard {
-            background-color: #FFDB58; /* Mustard color */
-            top: -250px;
-            right: 180px;
-        }
-
-        .nude {
-            background-color: #FFDDC1; /* Nude color */
-            bottom: 250px;
-            left: -27px;
-        }
-    }
-    
-    
-    .circle-container {
-        position: absolute;
-        z-index: 1; /* Ensure the circles are in the forefront */
-        width: 100%; /* Occupy full width */
-        height: 100%; /* Occupy full height */
-        display: flex; /* Arrange circles in a row */
-        justify-content: space-between; /* Space out circles evenly */
-        align-items: center; /* Center circles vertically */
-        padding: 20px; /* Add padding to avoid edge clipping */
-        pointer-events: none;
-    }
-
-    .circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        position: relative;
-            border: 2px solid rgb(255, 255, 255);
-        background: #e9e9e9d7;
-        
-            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5); /* Drop shadow */
-    
-    }
-
-    /* Colors */
-    .orange {
-       /* background-color: orange;*/
-       background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
-        top: 250px;
-        right: -100px;
-    }
-
-    .blue {
-        /*background-color: blue;*/
-        background-image: url("https://i.gifer.com/dJv.gif" );
-        bottom: -240px;
-        left: 760px;
-    }
-
-    .mustard {
-        /*background-color: #FFDB58;*/ /* Mustard color */
-        top: -300px;
-        right: 780px;
-    }
-
-    .nude {
-        /*background-color: #FFDDC1;*/ /* Nude color */
-        bottom: 290px;
-        left: -27px;
-    }
-
-    /* Icons */
-    .circle i {
-        color: rgb(154, 154, 154);
-        font-size: 30px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-      /* Icon gif */
-      .circle img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
-    }
-
-
-    .line {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 100%;
-        border-top: 2px solid black;
-    }
-
-    .vertical-line {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        height: 100%;
-        border-left: 2px solid black;
-    }
-
-    .box {
-        position: absolute;
-        border-radius: 20px;
-    }
-
-    .green-box {
-        background-color: green;
-        border: 3px solid red;
-        width: 50%;
-        height: 50%;
-        top: 25%;
-        left: 25%;
-    }
-
-    .yellow-box {
-        background-color: yellow;
-        width: calc(25% - 6px);
-        height: 50%;
-        top: 25%;
-        left: 0;
-    }
-
-    .brown-box {
-        background-color: brown;
-        width: calc(25% - 6px);
-        height: 50%;
-        top: 25%;
-        right: 0;
-    }
-
-
-    .call-for-action {
-        width: 200px;
-        background-color: gray;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        position: absolute;
-        top: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: none;
-    }
-
-    .call-for-action button {
-        background-color: black;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .loading-gif {
-        background-image: url('loading.gif');
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        position: absolute;
-        top: calc(50% - 30px);
-        left: calc(50% - 30px);
-        transition: opacity 2s; /* Fade out animation */
-        opacity: 0; /* Initially hidden */
-    }
-
-    /* Ensure map fills remaining space */
-    #map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .yellow-box, .brown-box {
-            display: none;
-        }
-
-        .green-box {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 0;
-        }
-
+  <link rel="shortcut icon" href="../phathisa_Web/assets/img/Phathisa logo.png">
+  <title>Phathisa Home</title>
   
-        .circle-container {
-            padding: 10px; /* Adjust padding for smaller screens */
-        }
-
-        .circle {
-            width: 40px; /* Reduce circle size for smaller screens */
-            height: 40px;
-        }
-
-        .circle i {
-            font-size: 20px; /* Reduce icon size for smaller screens */
-        }
-
-        /* Colors */
-        .orange {
-           /* background-color: orange;*/
-           background-image: url("https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" );
-            top: 190px;
-            right: 0px;
-        }
-
-        .blue {
-            /*background-color: blue;*/
-            bottom: -190px;
-            left: 170px;
-        }
-
-        .mustard {
-           /* background-color: #FFDB58; /* Mustard color */
-            top: -250px;
-            right: 180px;
-        }
-
-        .nude {
-            /*background-color: #FFDDC1; /* Nude color */
-            bottom: 250px;
-            left: -27px;
-        }
-    }
-
-    .hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-
-
-    .call-for-action {
-        width: 200px;
-        background-color: gray;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        position: absolute;
-        top: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: none;
-    }
-
-    .call-for-action button {
-        background-color: black;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .loading-gif {
-        background-image: url('loading.gif');
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        position: absolute;
-        top: calc(50% - 30px);
-        left: calc(50% - 30px);
-        transition: opacity 2s; /* Fade out animation */
-        opacity: 0; /* Initially hidden */
-    }
-
-    #controls {
-        top: 3px;
-        padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-    #recenter {
-            border-radius: 22px;
-            margin-bottom: 10px;
-            display: block;
-            width: 100%;
-            padding: 8px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            top:30px;
-        }
-        #route-form {
-            margin-top: 10px;
-        }
-        #route-form input[type="text"] {
-            width: calc(100% - 20px);
-            margin-bottom: 5px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #route-form button[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            top:50px;
-        }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE8a_Uo6tAQnBKVCMW-jfqsQYVtFOWIEk&libraries=places"></script>
-    <script>
-        var map, marker;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -26.2042, lng: 28.0592},
-                zoom: 13,
-                disableDefaultUI: true // Disable default UI controls
-            });
-            
-            // Add re-center button functionality
-            var recenterButton = document.getElementById('recenter');
-            recenterButton.onclick = function() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        var pos = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-                        map.setCenter(pos);
-                        map.setZoom(17); // Set zoom level to show a 1km radius
-                        if (marker) {
-                            marker.setPosition(pos);
-                        } else {
-                            marker = new google.maps.Marker({
-                                position: pos,
-                                map: map,
-                                title: 'Your Location',
-                                icon: {
-                                    url: 'https://siyapercy.online/Siyabonga%20Ndaba.jpg', // Custom image for marker
-                                    scaledSize: new google.maps.Size(32, 32) // Adjust size as needed
-                                }
-                            });
-                        }
-                    });
-                }
-            };
-
-            // Add autocomplete functionality to start and destination input fields
-            var startAutocomplete = new google.maps.places.Autocomplete(document.getElementById('start'));
-            var endAutocomplete = new google.maps.places.Autocomplete(document.getElementById('end'));
-
-            // Add route tracker
-            document.getElementById('route-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                calculateAndDisplayRoute();
-            });
-
-            // Hide overlay when clicking outside of it
-            window.onclick = function(event) {
-                var overlay = document.getElementById('overlay');
-                if (event.target != overlay && event.target.parentNode != overlay && event.target.parentNode.parentNode != overlay) {
-                    overlay.style.top = 'calc(100% - 50px)';
-                }
-            };
-        }
-
-        function calculateAndDisplayRoute() {
-            var directionsService = new google.maps.DirectionsService();
-            var directionsRenderer = new google.maps.DirectionsRenderer();
-            directionsRenderer.setMap(map);
-
-            var start = document.getElementById('start').value;
-            var end = document.getElementById('end').value;
-
-            directionsService.route({
-                origin: start,
-                destination: end,
-                travelMode: 'DRIVING'
-            }, function(response, status) {
-                if (status === 'OK') {
-                    directionsRenderer.setDirections(response);
-
-                    // Extract and display travel time
-                    var route = response.routes[0];
-                    var travelTime = 0;
-                    for (var i = 0; i < route.legs.length; i++) {
-                        travelTime += route.legs[i].duration.value;
-                    }
-                    var hours = Math.floor(travelTime / 3600);
-                    var minutes = Math.floor((travelTime % 3600) / 60);
-                    var formattedTime = '';
-                    if (hours > 0) {
-                        formattedTime += hours + ' hours ';
-                    }
-                    formattedTime += minutes + ' minutes';
-                    document.getElementById('travel-time').innerText = 'Estimated travel time: ' + formattedTime;
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-        }
-    </script>
 </head>
 <body>
-    <div id="map-container">
-        
-        <div class="circle-container">
-            <a href="blank.html" class="circle orange">
-                <img src="https://cdn.pixabay.com/animation/2023/03/29/07/21/07-21-46-206_512.gif" alt="compus">
-            </a>
-            
-            <a class="circle blue">
-                <img src="./images/counter.gif" alt="counter">
-            </a>
-            
-            <div class="circle mustard">
-                <i class="fas fa-bars" alt="menu"></i>
-
-            </div>
-            
-            <div class="circle nude">
-                <i class="fas fa-bell" alt="notifications"></i>
-
-            </div>
-        </div>
-        <div id="map"></div>
-        <!-- White div with drop shadow -->
-                   
-        <div class="overlay" id="overlay">
-            <button style="width: 100%;" onclick="toggleOverlay()">Toggle</button>
-            <br>
-            <div class="signin-form">
-                <h2>Create Mission</h2>
-                <form id="route-form" action="#">
-                    <input type="text" id="start" name="start" class="input-field" placeholder="Start" required>
-                    <input type="text" id="end" name="end" placeholder="Destination"  class="input-field" required>
-                    <a type="submit"  style="padding: 10px;" class="submit-btn">Find Routes</a>
-                </form>
-            </div>
-        
-            
-        </div>
-        
-        <div id="travel-time"></div>
+    <!-- Google Map Embed API -->
+    <div class="map-container">
+      <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.1879007781664!2d28.031928115029536!3d-26.20410298343092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c68c4f8d261%3A0x1eae9e6eddb3c00!2sJohannesburg%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1645225718996!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" gestureHandling="greedy"></iframe>
     </div>
+    <div class="scrollable-wrapper" id="scrollableWrapper" onclick="toggleHeight()" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)" ontouchend="handleTouchEnd()">
+      <div class="scrollable-div" id="scrollableDiv">
+        <div class="sipper-heading">All Services</div>
+          <div class="container">
+            <button class="button" id="businessButton">Business</button>
+            <button class="button" id="healthButton">Health</button>
+            <button class="button" id="parkingButton">Parking</button>
+            <button class="button" id="deliveryButton">Delivery</button>
+            <button class="button" id="educationButton">Education</button>
+          </div>
+        <div class="login-form" >
+  <div id="myModal" class="modal">
+  <div class="modal-content">
+
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>End Of tour</h3>
+    <div class="login-form" style="
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); padding: 10px; font-family: 'Rubik', sans-serif;">
+    <img src="./sky camel-03.png" alt="User Avatar">
+    <p>"Hi, My name is Errand Camel"</p>
+    <p>
+      Thanks for taking a tour of our website and demo App. 
+      The app is currently only available to a small, managed group as it is still undergoing improvements. 
+    </p><br>
+    <p><strong style="color: #c88c47;">Bellow is a list of services 
+      we can still offer you wihout the App:</strong> <span id="user-name"></span></p>
+      <p>Alternatively, contact the admin if you want to discuss serious business.</p>
+    <button id="request-btn" style="border-radius: 40px;">End Tour</button>
+    <button id="pay-now-btn" style="border-radius: 40px;">Admin</button>
+</div>
+    <style>
+      
+.faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.faq {
+  background-color: #daf0ff;
+  border: 1px solid #95cfff;
+  border-radius: 10px;
+  margin: 20px 4px;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.faq.active {
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.faq.active::before,
+.faq.active::after {
+  content: '\f075';
+  font-family: 'Font Awesome 5 Free';
+  color: #f3be0f;
+  font-size: 7rem;
+  position: absolute;
+  opacity: 0.2;
+  top: 20px;
+  left: 20px;
+  z-index: 0;
+  visibility: hidden;
+}
+
+.faq.active::before {
+  color: #3498db;
+  top: -10px;
+  left: -30px;
+  transform: rotateY(180);
+}
+
+.faq-title {
+  margin: 0 25px 0 0;
+}
+
+.faq-text {
+  display: none;
+  margin: 30px 0 0;
+}
+
+.faq.active .faq-text {
+  display: block;  
+}
+
+.faq-toggle {
+  background-color: transparent ;
+  border: 0;
+  border-radius: 50%  !important;
+  cursor: pointer  !important;
+  display: flex  !important;
+  align-items: center  !important;
+  justify-content: center  !important;
+  font-size: 16px  !important;
+  padding: 0  !important;
+  position: absolute !important;
+  top: 10px  !important;
+  right: 10px  !important;
+  height: 20px;
+  width: 20px  !important;
+}
+
+.faq-toggle:focus {outline: 0;}
+
+.faq-toggle .fa-times {display: none;}
+
+.faq.active .faq-toggle .fa-times {
+  display: block;
+  color: #fff;
+}
+
+.faq.active .faq-toggle .fa-chevron-down {display: none;}
+
+.faq.active .faq-toggle {background-color: #9fa4a8;}
+
+
+
+    </style>
+    <div class="faq-container">
+      <div class="faq">
+        <h3 class="faq-title">
+          Parking Attendents
+        </h3>
+
+        <p class="faq-text">
+          We keep track of all parking attendants in your area so you can be sure that your car is left in responsible hands.
+          <br>
+        <button id="request-btn" style="background-color: #3498db;">Search car</button>
+        <button id="pay-now-btn" style="background-color: #3498db;">Search person</button>
+        </p>
+        <button class="faq-toggle">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="faq">
+        <h3 class="faq-title">
+          Track your errand runner through whatsApp
+        </h3>
+        <p class="faq-text">
+          You can dial our WhatsApp number to get connected with an errand runner and keep track of them through WhatsApp live location.
+        </p>
+        <button class="faq-toggle">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="faq">
+        <h3 class="faq-title">
+          Car Hire/ fleet services
+        </h3>
+        <p class="faq-text">
+          Through our fleet services, you can hire a car to run errands, or you can lend your car to an errand runner through us, and we will pay you.
+        </p>
+        <button class="faq-toggle">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="faq">
+        <h3 class="faq-title">
+          business promotions
+        </h3>
+        <p class="faq-text">We can promote your business through word of mouth by giving out your flyers to our errand runners so they can market your services to our clients
+        </p>
+        <button class="faq-toggle">
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <p><strong>Got more questions? </strong> <span id="user-name"></span></p>
+      <p>We've got more answers. Keep scrolling...
+      </p>
+    
+      <div class="faq-container">
+        <div class="faq">
+          <h3 class="faq-title">
+            Can I verify attendant?
+          </h3>
+  
+          <p class="faq-text">
+            We keep track of all parking Attendents in your area so you can be
+            sure that your car is left in responsible hands <a href="parking.html">verify Attendent</a>
+          </p>
+  
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+  
+        <div class="faq">
+          <h3 class="faq-title">
+            How do request an errand runner or healther care worker
+          </h3>
+          <p class="faq-text">
+           You can dial our whatsApp number to get connected with an errand runner adn keep track of them 
+           throught whatsApp live location.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="faq">
+          <h3 class="faq-title">
+            How safe Am I here?
+          </h3>
+          <p class="faq-text">
+            Through our fleet services you can hire a car to do an errand or you can borrow your car to an 
+            erran runner through us and we pay you.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="faq">
+          <h3 class="faq-title">
+            How do I pay?
+          </h3>
+          <p class="faq-text">
+            We can promote your business through word of mouth by giving the out your flyers to our errand 
+            runners so they can market your services to our clients.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="faq">
+          <h3 class="faq-title">
+            How does phathisa Errand servce charge?
+          </h3>
+          <p class="faq-text">
+            We can promote your business through word of mouth by giving the out your flyers to our errand 
+            runners so they can market your services to our clients.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="faq">
+          <h3 class="faq-title">
+            How do I sign-up to work as an errand runner
+          </h3>
+          <p class="faq-text">
+            We can promote your business through word of mouth by giving the out your flyers to our errand 
+            runners so they can market your services to our clients.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="faq">
+          <h3 class="faq-title">
+            Which part of your services are currently available?
+          </h3>
+          <p class="faq-text">
+            We can promote your business through word of mouth by giving the out your flyers to our errand 
+            runners so they can market your services to our clients.
+          </p>
+          <button class="faq-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
     <script>
-        initMap();
+      const toggles = document.querySelectorAll('.faq-toggle')
+
+toggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    toggle.parentNode.classList.toggle('active')
+  })
+})
     </script>
-
+  </div>
+</div>
 <script>
-    function toggleOverlay() {
-        var overlay = document.getElementById('overlay');
-        if (overlay.style.top === 'calc(50% - 50px)') {
-            overlay.style.top = 'calc(100% - 50px)';
-        } else {
-            overlay.style.top = 'calc(50% - 50px)';
-        }
+  let total = 0;
+
+  function addToDisplay(amount) {
+    total += amount;
+    document.getElementById('display').textContent = "Total: R" + total;
+  }
+
+  function payNow() {
+    // Display modal
+    document.getElementById('myModal').style.display = "block";
+  }
+
+  function closeModal() {
+    // Close modal
+    document.getElementById('myModal').style.display = "none";
+  }
+
+  function resetTotal() {
+    // Reset total to 0
+    total = 0;
+    document.getElementById('display').textContent = "Total: R" + total;
+  }
+</script>
+<!-- Your login form content goes here -->
+
+<div id="div1" class="req-container">
+              <div class="dropdown">
+                <button class="dropdown-button" onclick="payNow()">Pay For Parking</button>
+                <div id="dropdown-content-3" class="dropdown-content">
+                  <p>Avail: R0.00</p>
+                  <p class="dropdown-description">Pay through our safety vouchers</p>
+                  <form onclick="stopPropagation(event)">
+                    <input class="form-input" type="text" placeholder="Voucher No." onclick="stopPropagation(event)">
+                    <input class="form-input" type="text" placeholder="Attendent ID" onclick="stopPropagation(event)">
+                   <p>No voucher? <a href="../deep/menu/wallet/buy.html">buy one here</a></p><br>
+
+                    <button class="form-button" type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+              <div class="dropdown" onclick="toggleDropdown(1)">
+                <button class="dropdown-button">Search Attendent</button>
+                <div id="dropdown-content-1" class="dropdown-content">
+                  <p class="dropdown-description">Enter Attendent Details</p>
+                  <form>
+                    <input class="form-input" type="text" placeholder="Attendent ID" onclick="stopPropagation(event)">
+                    <input class="form-input" type="text" placeholder="Area" onclick="stopPropagation(event)">
+                    <button class="form-button" type="button" onclick="payNow()">Submit</button>
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+         
+          </div>
+        </div>
+        <div class="scrollable-div" id="scrollableDiv">
+         
+             
+          <div class="dot-container">
+          </div>
+        </div>
+        <div class="scrollable-div" id="scrollableDiv">
+         
+            <!-- Your login form content goes here -->
+            <h2>Errand Run</h2>
+            <form action="">
+              <label for="username">Start Location</label><br>
+              <input type="text" id="username" name="username"><br>
+              <label for="password">End location</label><br>
+              <input type="password" id="password" name="password"><br><br>
+              <input type="submit" value="CONFIRM">
+            </form>
+      <div class="dot-container">
+      </div>
+    </div>
+      </div>
+    <div class="menu-btn" onclick="toggleLeftMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="menu" id="menu">
+      <!-- Your menu content goes here -->
+      <span class="close-btn" onclick="toggleLeftMenu()">&#10006;</span>
+      <ul>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">History</a></li>
+        <li><a href="#">Wallet</a></li>
+        <li><a href="#">Gift Cards</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+    <div class="right-menu-btn" onclick="toggleRightMenu()">
+      <i class="fas fa-bell" alt="notifications"></i>
+      
+    </div>
+     <div class="right-menu" id="right-menu">
+      <!-- Your menu content goes here -->
+      <span class="close-btn" onclick="toggleRightMenu()">&#10006;</span>
+      <ul>
+        <li><a href="#">Notifications</a></li>
+        <li><a>you are not logged in</a></li>
+      </ul>
+    </div>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script>
+    function toggleLeftMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("show-menu");
     }
 
-    function showLoading() {
-        var loadingGif = document.getElementById('loadingGif');
-        loadingGif.classList.remove('hidden');
-        setTimeout(function () {
-            window.location.href = 'action.html';
-        }, 2000); // Redirect after 2 seconds
+    function toggleRightMenu() {
+      const rightMenu = document.getElementById("right-menu");
+      rightMenu.classList.toggle("right-show-menu");
     }
-</script>
+  </script>
+  <div class="bottom-menu-btn" onclick="toggleMenu()">
+    <img src="./images/counter.gif" alt="counter">
+
+  </div>
+  <div class="bottom-left-menu-btn" onclick="recenterMap()">
+    <img src="./images/campass.gif" alt="Compass GIF"> <!-- Compass GIF -->
+  </div>
+    <div class="bottom-menu" id="bottom-menu">
+    <!-- Your menu content goes here -->
+    <span class="close-btn" onclick="toggleMenu()">&#10006;</span>
+    <ul>
+      <li><a href="#">Current Services</a></li>
+      <li><a href="#">Schedualed services</a></li>
+    </ul>
+  </div>
+  <script>
+    function toggleMenu() {
+      const bottom_menu = document.getElementById("bottom-menu");
+      bottom_menu.classList.toggle("bottom-show-menu");
+    }
+  </script>
+  
+  <script>
+    let startY;
+  
+    function handleTouchStart(event) {
+      if (window.innerWidth <= 600) {
+        startY = event.touches[0].clientY;
+      }
+    }
+  
+    function handleTouchMove(event) {
+      if (window.innerWidth <= 600) {
+        const scrollableWrapper = document.getElementById('scrollableWrapper');
+        if (event.touches[0].clientY < startY) {
+          // Swiping up
+          scrollableWrapper.style.height = '92%';
+        } else if (event.touches[0].clientY > startY) {
+          // Swiping down
+          scrollableWrapper.style.height = '85px';
+        }
+      }
+    }
+  
+  
+    function handleTouchEnd() {
+      startY = null;
+    }
+  
+    function toggleHeight() {
+      if (window.innerWidth > 600) {
+        const scrollableWrapper = document.getElementById('scrollableWrapper');
+        if (scrollableWrapper.classList.contains('clicked')) {
+          scrollableWrapper.classList.remove('clicked');
+        } else {
+          scrollableWrapper.classList.add('clicked');
+        }
+      }
+    }
+  
+    function stopPropagation(event) {
+      event.stopPropagation();
+    }
+  </script>
+
+  <link rel="script" href="./script.js">
 </body>
 </html>
