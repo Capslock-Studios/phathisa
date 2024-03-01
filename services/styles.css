@@ -133,10 +133,10 @@ body {
 
 
 .modal-content {
-    background-color: #ffffff;
+    background-color: #ebf7ff;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #99c7ff;
     width: 80%;
 }
 .modal-content img {
@@ -149,7 +149,7 @@ body {
 }
 .modal-content button {
     display: inline-block;
-    background-color: #4CAF50;
+    background-color:  #3498db;
     color: white;
     padding: 10px 20px;
     margin-right: 10px;
@@ -194,17 +194,16 @@ body {
 
 @media screen and (max-width: 600px) {
 .modal-content {
-background-color: #ffffff;
-border: 1px solid #888;
 width: 43%;
 text-align: center;
 border-radius: 5px;
+background-color: #ebf7ff;
+border: 1px solid #99c7ff;
 }
 }
 @media screen and (max-width: 360px) {
 .modal-content {
-background-color: #ffffff;
-border: 1px solid #888;
+  
 width: 43%;
 text-align: center;
 border-radius: 5px;
